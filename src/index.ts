@@ -21,6 +21,20 @@ app.get('/dogss', (req: any, res: any) => {
   res.send('dog request');
 });
 
+// 콜론으로 경로 매개변수를 설정 할 수 있다.
+// req.params에 들어온다.
+app.get('/r/:subreddit/:postId', (req: any, res: any) => {
+  const { subreddit, postId } = req.params;
+  res.send(`SUBREDDIT : ${subreddit} POST ID : ${postId}`);
+});
+
+/* 제네릭 응답(라우트와 일치 하지 않을 때 응답한다.)
+제네릭 응답은 항상 밑에 있어야한다
+(* 는 전부를 뜻하며 첫번째에 있으면 아래에 있는 코드를 무시하고 제네릭만 실행됨) */
+app.get('*', (req: any, res: any) => {
+  res.send("I don't know that path!");
+});
+
 app.listen(3000, () => {
   console.log('LISTENING ON PORT 3000');
 });
