@@ -28,6 +28,17 @@ app.get('/r/:subreddit/:postId', (req: any, res: any) => {
   res.send(`SUBREDDIT : ${subreddit} POST ID : ${postId}`);
 });
 
+//req.query로 query parameter 값을 가져올 수 있다.
+//익스프레스가 알아서 객체로 파싱해서 가져옴.
+app.get('/search', (req: any, res: any) => {
+  const { q } = req.query;
+  if (!q) {
+    res.send(`nothing`);
+  } else {
+    res.send(`${q}`);
+  }
+});
+
 /* 제네릭 응답(라우트와 일치 하지 않을 때 응답한다.)
 제네릭 응답은 항상 밑에 있어야한다
 (* 는 전부를 뜻하며 첫번째에 있으면 아래에 있는 코드를 무시하고 제네릭만 실행됨) */
