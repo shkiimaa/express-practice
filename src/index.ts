@@ -9,7 +9,7 @@ const port = 3000;
 app.set('view engine', 'ejs');
 
 //외부 디렉토리에서 살행시 veiws 에러를 해결하기 위한 세팅
-app.set('views', path.join(__dirname, '/views'));
+app.set('views', path.join(__dirname, '../views'));
 
 //res.render에 경로를 따로 안적는 이유는 이미 default값이 views 디렉토리 이기 때문이다.
 //res.render는 랜더링된 결과물을 전달한다.
