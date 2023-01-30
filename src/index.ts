@@ -1,24 +1,20 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
-//app.use는 요청이 들어오면 콜백을 실행
+const port = 3000;
 
-//Express가 자동으로 HTTP요청 정보를 파싱해 JS객체를 만들고 콜백의 첫번 째 인수로 전달한다.
-// app.use((req: any, res: any) => {
-//   console.log('WE GOT A NEW REQUEST');
-//   res.send({ color: 'red' });
-// });
+// ejs 사용하기
+// view engine의 디폴트 값을 ejs로 변경
+app.set('view engine', 'ejs');
 
+//외부 디렉토리에서 살행시 veiws 에러를 해결하기 위한 세팅
+app.set('views', path.join(__dirname, '/views'));
+
+//res.render에 경로를 따로 안적는 이유는 이미 default값이 views 디렉토리 이기 때문이다.
+//res.render는 랜더링된 결과물을 전달한다.
 app.get('/', (req: any, res: any) => {
-  res.send('This is the home page');
-});
-
-app.get('/cats', (req: any, res: any) => {
-  res.send('cat request');
-});
-
-app.get('/dogss', (req: any, res: any) => {
-  res.send('dog request');
+  res.render('home');
 });
 
 // 콜론으로 경로 매개변수를 설정 할 수 있다.
@@ -46,6 +42,6 @@ app.get('*', (req: any, res: any) => {
   res.send("I don't know that path!");
 });
 
-app.listen(3000, () => {
-  console.log('LISTENING ON PORT 3000');
+app.listen(port, () => {
+  console.log(`LISTENING ON PORT ${port}`);
 });
