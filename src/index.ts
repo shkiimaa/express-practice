@@ -28,6 +28,11 @@ app.get('/r/:subreddit', (req: any, res: any) => {
   res.render('subreddit', { title: subreddit });
 });
 
+app.get('/loop', (req: any, res: any) => {
+  const cats: string[] = ['Blue', 'Rocket', 'Monty', 'Stephanie', 'Winston'];
+  res.render('loop', { cats });
+});
+
 // 콜론으로 경로 매개변수를 설정 할 수 있다.
 // req.params에 들어온다.
 app.get('/r/:subreddit/:postId', (req: any, res: any) => {
