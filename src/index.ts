@@ -17,6 +17,17 @@ app.get('/', (req: any, res: any) => {
   res.render('home');
 });
 
+app.get('/rand', (req: any, res: any) => {
+  const random = Math.floor(Math.random() * 10) + 1;
+  res.render('random', { rand: random });
+});
+
+app.get('/r/:subreddit', (req: any, res: any) => {
+  const { subreddit } = req.params;
+  console.log(subreddit);
+  res.render('subreddit', { title: subreddit });
+});
+
 // 콜론으로 경로 매개변수를 설정 할 수 있다.
 // req.params에 들어온다.
 app.get('/r/:subreddit/:postId', (req: any, res: any) => {
