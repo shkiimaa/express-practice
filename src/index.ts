@@ -1,8 +1,12 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const redditData = require('../data.json');
+console.log(redditData.soccer);
 
 const port = 3000;
+
+app.use(express.static(path.join(__dirname, '../public')));
 
 // ejs 사용하기
 // view engine의 디폴트 값을 ejs로 변경
@@ -24,8 +28,12 @@ app.get('/rand', (req: any, res: any) => {
 
 app.get('/r/:subreddit', (req: any, res: any) => {
   const { subreddit } = req.params;
-  console.log(subreddit);
-  res.render('subreddit', { title: subreddit });
+  const data = redditData[subreddit];
+  if (data) {
+    res.render('subreddit', { ...data });
+  } else {
+    res.send(`${subreddit} is not found`);
+  }
 });
 
 app.get('/loop', (req: any, res: any) => {
